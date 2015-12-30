@@ -35,3 +35,7 @@ while(True):
 	if key == ord('a'):
 		print 'Has pulsado a'
 		break
+	
+# When everything done, release the capture
+camara.release()
+cv2.destroyAllWindows()
