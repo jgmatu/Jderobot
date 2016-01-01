@@ -21,7 +21,7 @@ try:
         print ("Images....")
     	camRGB.getImage(rgb)
 	viewer.display(rgb)
-	viewer.displayFrameRate(camRGB->getRefreshRate());
+	viewer.displayFrameRate(camRGB.getRefreshRate());
 
 except:
     traceback.print_exc()
