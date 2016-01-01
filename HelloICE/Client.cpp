@@ -13,8 +13,8 @@ main(int argc, char* argv[])
 	
 	/* Code Client */
 	try {
-		ic = Ice::initialize(argc , argv);
-		Ice::ObjectPrx base = ic->stringToProxy("SimplePrinter:default -p 10000");
+		ic = Ice::initialize(argc , argv);					    /* Same as Server */
+		Ice::ObjectPrx base = ic->stringToProxy("SimplePrinter:default -p 10000");  /* Obtain a proxy for the remote printer. We create a proxy by calling stringToProxy on the communicator, with the string "SimplePrinter:default -p 10000". Note that the string contains the object identity and the port number that were used by the server. */
 		PrinterPrx printer = PrinterPrx::checkedCast(base);
 		if (!printer)
 			throw "Invalid Proxy";
