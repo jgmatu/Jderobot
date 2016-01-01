@@ -1,7 +1,6 @@
 import sys, traceback, Ice
 import jderobot
 
-
 status = 0
 ic = None
 try:
