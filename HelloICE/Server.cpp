@@ -31,7 +31,7 @@ main(int argc, char* argv[])
             ic->createObjectAdapterWithEndpoints("SimplePrinterAdapter", "default -p 10000"); /* We create an object adapter by calling createObjectAdapterWithEndpoints on the Communicator instance. and default to protocol TCP/IP */
         Ice::ObjectPtr object = new PrinterI;                                                 /* Built-in Object Adapter PrinterI object */  
         adapter->add(object, ic->stringToIdentity("SimplePrinter"));                          /* The string "SimplePrinter" is the name of the Ice object. */
-        adapter->activate();
+        adapter->activate();                                                                  /* The server starts to process incoming requests from clients as soon as the adapter is activated. */
         ic->waitForShutdown();
     
     /*  Exceptions first for Ice comunications later for msg  */  
