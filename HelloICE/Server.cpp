@@ -26,7 +26,7 @@ main(int argc, char* argv[])
     
     /* Code Server */ 
     try {
-        ic = Ice::initialize(argc, argv);                                             /* Initialize Type ic pointer */
+        ic = Ice::initialize(argc, argv);                                             /* Initialize type ic pointer with the call Ice::initialize */
         Ice::ObjectAdapterPtr adapter =                                               /* Object adapter Server Implementation */
             ic->createObjectAdapterWithEndpoints("SimplePrinterAdapter", "default -p 10000");
         Ice::ObjectPtr object = new PrinterI;                                         /* Built-in Object Adapter */  
