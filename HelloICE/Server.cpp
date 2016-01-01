@@ -21,7 +21,7 @@ printString(const string& s, const Ice::Current&)
 int
 main(int argc, char* argv[])
 {
-    int status = 0;                       /* Value of status process for system */
+    int status = 0;                       /* Value of status process for operating system */
     Ice::CommunicatorPtr ic;              /* Type of Object adapter and proxy Adapter */
     
     /* Code Server */ 
@@ -30,7 +30,7 @@ main(int argc, char* argv[])
         Ice::ObjectAdapterPtr adapter =                                                       /* Object adapter Server Implementation */
             ic->createObjectAdapterWithEndpoints("SimplePrinterAdapter", "default -p 10000"); /* We create an object adapter by calling createObjectAdapterWithEndpoints on the Communicator instance. and default to protocol TCP/IP */
         Ice::ObjectPtr object = new PrinterI;                                                 /* Built-in Object Adapter PrinterI object */  
-        adapter->add(object, ic->stringToIdentity("SimplePrinter"));
+        adapter->add(object, ic->stringToIdentity("SimplePrinter"));                          /* The string "SimplePrinter" is the name of the Ice object. */
         adapter->activate();
         ic->waitForShutdown();
     
