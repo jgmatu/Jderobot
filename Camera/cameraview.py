@@ -5,6 +5,7 @@ import jderobot
 
 status = 0
 ic = None
+# Code Camera client 
 try:
 
     ic     = Ice.initialize(sys.argv)
