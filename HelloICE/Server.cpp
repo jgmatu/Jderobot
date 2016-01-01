@@ -32,7 +32,7 @@ main(int argc, char* argv[])
         Ice::ObjectPtr object = new PrinterI;                                                 /* Built-in Object Adapter PrinterI object */  
         adapter->add(object, ic->stringToIdentity("SimplePrinter"));                          /* The string "SimplePrinter" is the name of the Ice object. */
         adapter->activate();                                                                  /* The server starts to process incoming requests from clients as soon as the adapter is activated. */
-        ic->waitForShutdown();
+        ic->waitForShutdown();                                                                /*  call waitForShutdown. This call suspends the calling thread until the server implementation terminates, either by making a call to shut down the run time, or in response to a signal.  */
     
     /*  Exceptions first for Ice comunications later for msg  */  
     } catch (const Ice::Exception& e) {
