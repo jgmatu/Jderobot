@@ -26,10 +26,10 @@ main(int argc, char* argv[])
     
     /* Code Server */ 
     try {
-        ic = Ice::initialize(argc, argv);                                             /* Initialize type ic pointer with the call Ice::initialize */
-        Ice::ObjectAdapterPtr adapter =                                               /* Object adapter Server Implementation */
-            ic->createObjectAdapterWithEndpoints("SimplePrinterAdapter", "default -p 10000");
-        Ice::ObjectPtr object = new PrinterI;                                         /* Built-in Object Adapter */  
+        ic = Ice::initialize(argc, argv);                                                     /* Initialize type ic pointer with the call Ice::initialize */
+        Ice::ObjectAdapterPtr adapter =                                                       /* Object adapter Server Implementation */
+            ic->createObjectAdapterWithEndpoints("SimplePrinterAdapter", "default -p 10000"); /* We create an object adapter by calling createObjectAdapterWithEndpoints on the Communicator instance. and default to protocol TCP/IP */
+        Ice::ObjectPtr object = new PrinterI;                                                 /* Built-in Object Adapter */  
         adapter->add(object, ic->stringToIdentity("SimplePrinter"));
         adapter->activate();
         ic->waitForShutdown();
