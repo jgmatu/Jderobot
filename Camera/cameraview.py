@@ -18,8 +18,8 @@ try:
     while viewerself.isVisible():
         print ("Images....")
     	camRGB.getImage(rgb)
-		viewer.display(rgb)
-		viewer.displayFrameRate(camRGB->getRefreshRate());
+	viewer.display(rgb)
+	viewer.displayFrameRate(camRGB->getRefreshRate());
 
 except:
     traceback.print_exc()
