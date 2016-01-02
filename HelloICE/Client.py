@@ -22,8 +22,8 @@ try:
         raise RuntimeError("Invalid proxy")
 
     printer.printString("Hello World! with Ice :)!")          # We now have a live proxy in our address space and can call the printString method with arguments of method.
+    printer.printInteger(2);
 
-    
 # Same as for the server: we use the same try and except blocks to deal with errors
 except:
     traceback.print_exc()
