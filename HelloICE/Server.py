@@ -1,10 +1,10 @@
 import sys, traceback, Ice
 import Demo
 
-class PrinterI(Demo.Printer):                                   # Class Printer Interface
-    def printString(self , s , current=None):                     # Method printString write no StdOut the string.
+class PrinterI(Demo.Printer):                                     # Class Printer Interface
+    def printString(self , s , current=None):                     # Method printString write  on StdOut the string.
         print s
-    def printInteger(self , n , current=None):                     # Method printString write no StdOut the string.
+    def printInteger(self , n , current=None):                    # Method printInteger write on StdOut the Integer.
         print n
 
 status = 0
