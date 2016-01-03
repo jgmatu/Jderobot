@@ -8,6 +8,7 @@ from PyQt4 import QtGui,QtCore
 
 ic = None
 status = 0
+
 try:
     ic = EasyIce.initialize(sys.argv)
     properties  = ic.getProperties()
