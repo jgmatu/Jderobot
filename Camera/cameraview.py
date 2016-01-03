@@ -8,14 +8,15 @@ from PyQt4 import QtGui,QtCore
 
 ic = None
 status = 0
-
 try:
+
     ic = EasyIce.initialize(sys.argv)
     properties  = ic.getProperties()
     basecamera  = ic.propertyToProxy("cameraA:default -h 0.0.0.0 -p 9999")
     cameraProxy = jderobot.CameraPrx.checkedCast(basecamera)
 
     if cameraProxy:
+
         image = cameraProxy.getImageData("RGB8")
         height= image.description.height
         width = image.description.width
@@ -32,6 +33,7 @@ try:
 
 except:
     traceback.print_exc()
+    exit()
     status = 1
 
 sys.exit(status)
