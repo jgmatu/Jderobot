@@ -27,7 +27,7 @@ try:
 
     else:
         print 'Interface camera not connected'
-        status = 0
+        status = 1
 
 except:
     traceback.print_exc()
