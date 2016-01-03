@@ -1,39 +1,36 @@
 #!/usr/bin/python
 
 import sys, traceback, Ice
+import easyiceconfig as EasyIce
 import jderobot
+import sensors
+from PyQt4 import QtGui,QtCore
 
-status = 0
 ic = None
-# Code Camera client 
+status = 0
 try:
+    ic = EasyIce.initialize(sys.argv)
+    properties  = ic.getProperties()
+    basecamera  = ic.propertyToProxy("cameraA:default -h 0.0.0.0 -p 9999")
+    cameraProxy = jderobot.CameraPrx.checkedCast(basecamera)
 
-    ic     = Ice.initialize(sys.argv)
-    base   = ic.propertyToProxy("cameraA:default -h 0.0.0.0 -p 9999")
-    camera = jderobot.CameraPrx.checkedCast(base)
+    if cameraProxy:
+        image = cameraProxy.getImageData("RGB8")
+        height= image.description.height
+        width = image.description.width
 
-    camRGB = jderobot.cameraClient(ic , "Cameraview.Camera.")
-    camRGB.start()
+        trackImage = np.zeros((height, width,3), np.uint8)
+        trackImage.shape = height, width, 3
 
-    if not camRGB:
-        raise RuntimeError("Invalid Proxy")
+        thresoldImage = np.zeros((height, width,1), np.uint8)
+        thresoldImage.shape = height, width,
 
-    while viewerself.isVisible():
-        print ("Images....")
-    	camRGB.getImage(rgb)
-	viewer.display(rgb)
-	viewer.displayFrameRate(camRGB.getRefreshRate());
+    else:
+        print 'Interface camera not connected'
+        status = 0
 
 except:
     traceback.print_exc()
     status = 1
-
-if ic:
-    # Clean up
-    try:
-        ic.destroy()
-    except:
-        traceback.print_exc()
-        status = 1
 
 sys.exit(status)
