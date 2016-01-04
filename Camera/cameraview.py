@@ -30,8 +30,8 @@ try:
         width = image.description.width
         height= image.description.height
 
-        print(cameraProxy.getCameraDescription())
-        print(cameraProxy.getImageDescription())
+        cameraDescription = Proxy.getCameraDescription())
+        imageDescription = cameraProxy.getImageDescription())
 
         trackImage = np.zeros((height, width,3), np.uint8)
         trackImage.shape = height, width, 3
