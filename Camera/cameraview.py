@@ -18,17 +18,20 @@ try:
     basecamera  = ic.stringToProxy("cameraA:default -h 0.0.0.0 -p 9999 ")
     cameraProxy = jderobot.CameraPrx.checkedCast(basecamera)
 
-    print(cameraProxy)
-    
-    if cameraProxy:
+    while cameraProxy:
 
         image = cameraProxy.getImageData("RGB8")
+
+        pixmap = image.pixelData
+
+        # Image data bytes pixels
+        print(pixmap)
+
         width = image.description.width
         height= image.description.height
 
-        CameraDesc = cameraProxy.getCameraDescription()
-
-        print(CameraDesc)
+        print(cameraProxy.getCameraDescription())
+        print(cameraProxy.getImageDescription())
 
         trackImage = np.zeros((height, width,3), np.uint8)
         trackImage.shape = height, width, 3
@@ -36,10 +39,8 @@ try:
         thresoldImage = np.zeros((height, width,1), np.uint8)
         thresoldImage.shape = height, width,
 
-    else:
-
-        print 'Interface camera not connected'
-        status = 1
+    print 'Interface camera not connected'
+    status = 1
 
 except:
 
@@ -48,15 +49,10 @@ except:
     status = 1
 
 if ic:
-    
     # Clean up
-    
     try:
-        
         ic.destroy()
-        
     except:
-        
         traceback.print_exc()
         status = 1
 
