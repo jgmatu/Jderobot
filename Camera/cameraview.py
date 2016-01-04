@@ -48,7 +48,9 @@ except:
     status = 1
 
 if ic:
+    
     # Clean up
+    
     try:
         
         ic.destroy()
