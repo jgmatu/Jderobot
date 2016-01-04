@@ -50,8 +50,11 @@ except:
 if ic:
     # Clean up
     try:
+        
         ic.destroy()
+        
     except:
+        
         traceback.print_exc()
         status = 1
 
