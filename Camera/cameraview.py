@@ -9,24 +9,26 @@ import sensors
 import threading
 
 
+
 ic = None
 status = 0
 try:
 
     ic          = EasyIce.initialize(sys.argv)
-    properties  = ic.getProperties()
     basecamera  = ic.stringToProxy("cameraA:default -h 0.0.0.0 -p 9999 ")
     cameraProxy = jderobot.CameraPrx.checkedCast(basecamera)
-    print(ic)
-    print(properties)
-    print(basecamera)
-    print(cameraProxy)
 
+    print(cameraProxy)
+    
     if cameraProxy:
 
         image = cameraProxy.getImageData("RGB8")
-        height= image.description.height
         width = image.description.width
+        height= image.description.height
+
+        CameraDesc = cameraProxy.getCameraDescription()
+
+        print(CameraDesc)
 
         trackImage = np.zeros((height, width,3), np.uint8)
         trackImage.shape = height, width, 3
@@ -35,6 +37,7 @@ try:
         thresoldImage.shape = height, width,
 
     else:
+
         print 'Interface camera not connected'
         status = 1
 
@@ -53,4 +56,3 @@ if ic:
         status = 1
 
 sys.exit(status)
-
