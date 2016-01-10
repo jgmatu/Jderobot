@@ -27,12 +27,7 @@ try:
     while cameraProxy :
 
         image = cameraProxy.getImageData("RGB8")
-        # Image data bytes pixels
-        scene.addPixmap(QPixmap(image.pixelData))
-        grview.setScene(scene)
-        grview.show()
-
-        print(image.pixelData)
+        
         width = image.description.width
         height= image.description.height
 
@@ -44,6 +39,14 @@ try:
 
         thresoldImage = np.zeros((height, width,1), np.uint8)
         thresoldImage.shape = height, width,
+
+        # Image data bytes pixels
+        print(image.pixelData)
+        
+        scene.addPixmap(QPixmap(image.pixelData))
+        grview.setScene(scene)
+        grview.show()
+
 
     print 'Interface camera not connected'
     status = 1
