@@ -1,15 +1,15 @@
 #!/usr/bin/python
 
 import sys, traceback, Ice
-from PyQt4 import QtGui,QtCore
 import easyiceconfig as EasyIce
 import numpy as np
 import jderobot
-import sensors
-import threading
+from PyQt4.QtCore import *
+from PyQt4.QtGui import *
 
 
 
+# Mirate el GUI de jderobot ;) descansa ! :) felices reyes magos javi! : )
 ic = None
 status = 0
 try:
@@ -18,20 +18,26 @@ try:
     basecamera  = ic.stringToProxy("cameraA:default -h 0.0.0.0 -p 9999 ")
     cameraProxy = jderobot.CameraPrx.checkedCast(basecamera)
 
-    while cameraProxy:
+
+
+    app = QApplication(sys.argv)
+    grview = QGraphicsView()
+    scene = QGraphicsScene()
+
+    while cameraProxy :
 
         image = cameraProxy.getImageData("RGB8")
-
-        pixmap = image.pixelData
-
         # Image data bytes pixels
-        print(pixmap)
+        scene.addPixmap(QPixmap(image.pixelData))
+        grview.setScene(scene)
+        grview.show()
 
+        print(image.pixelData)
         width = image.description.width
         height= image.description.height
 
-        cameraDescription = Proxy.getCameraDescription())
-        imageDescription = cameraProxy.getImageDescription())
+        cameraDescription = cameraProxy.getCameraDescription()
+        imageDescription  = cameraProxy.getImageDescription()
 
         trackImage = np.zeros((height, width,3), np.uint8)
         trackImage.shape = height, width, 3
@@ -56,4 +62,4 @@ if ic:
         traceback.print_exc()
         status = 1
 
-sys.exit(status)
+sys.exit(app.exec_())
