@@ -6,6 +6,7 @@ import numpy as np
 import jderobot
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
+import matplotlib.pyplot as plt
 
 
 
@@ -23,30 +24,25 @@ try:
     app = QApplication(sys.argv)
     grview = QGraphicsView()
     scene = QGraphicsScene()
+    cameraDescription = cameraProxy.getCameraDescription()
 
     while cameraProxy :
 
         image = cameraProxy.getImageData("RGB8")
-        
+        imageDescription  = cameraProxy.getImageDescription()
+
         width = image.description.width
         height= image.description.height
 
-        cameraDescription = cameraProxy.getCameraDescription()
-        imageDescription  = cameraProxy.getImageDescription()
+        img = np.zeros((height , width , 3) , np.uint8)
+        img = np.frombuffer(image.pixelData , dtype=np.uint8)
+        img.shape = height, width, 3
 
-        trackImage = np.zeros((height, width,3), np.uint8)
-        trackImage.shape = height, width, 3
-
-        thresoldImage = np.zeros((height, width,1), np.uint8)
-        thresoldImage.shape = height, width,
-
-        # Image data bytes pixels
-        print(image.pixelData)
-        
-        scene.addPixmap(QPixmap(image.pixelData))
+        plt.imshow(img,aspect="auto")
+        plt.show()
+        scene.addPixmap(QPixmap(img))
         grview.setScene(scene)
         grview.show()
-
 
     print 'Interface camera not connected'
     status = 1
