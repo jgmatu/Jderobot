@@ -1,11 +1,9 @@
 #!/usr/bin/python
 
 import sys, traceback, Ice
+import jderobot
 import easyiceconfig as EasyIce
 import numpy as np
-import jderobot
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
 import matplotlib.pyplot as plt
 
 
@@ -20,10 +18,6 @@ try:
     cameraProxy = jderobot.CameraPrx.checkedCast(basecamera)
 
 
-
-    app = QApplication(sys.argv)
-    grview = QGraphicsView()
-    scene = QGraphicsScene()
     cameraDescription = cameraProxy.getCameraDescription()
 
     while cameraProxy :
@@ -40,9 +34,6 @@ try:
 
         plt.imshow(img,aspect="auto")
         plt.show()
-        scene.addPixmap(QPixmap(img))
-        grview.setScene(scene)
-        grview.show()
 
     print 'Interface camera not connected'
     status = 1
@@ -61,4 +52,4 @@ if ic:
         traceback.print_exc()
         status = 1
 
-sys.exit(app.exec_())
+sys.exit(status)
